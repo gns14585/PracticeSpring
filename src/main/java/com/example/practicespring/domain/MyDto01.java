@@ -1,11 +1,16 @@
 package com.example.practicespring.domain;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MyDto01 {
-    @Getter
     private String name;
-
-    @Getter
+    private Integer age;
+    private String gender;
     private String address;
+    private Integer phoneNumber;
 }
