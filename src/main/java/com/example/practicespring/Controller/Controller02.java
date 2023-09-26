@@ -2,8 +2,7 @@ package com.example.practicespring.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("main2")
@@ -25,5 +24,27 @@ public class Controller02 {
     @RequestMapping("sub3")
     public void method() {
 
+    }
+
+//    @RequestMapping(value = "sub4", method = RequestMethod.POST)
+    @GetMapping("sub4")
+    public void method3(String name, String address) {
+
+    }
+    @PostMapping("sub5")
+    public void method4(String name, String address) {
+        System.out.println("name = " + name);
+        System.out.println("address = " + address);
+    }
+
+    @GetMapping("sub6")
+    public void method6() {
+
+    }
+
+    @PostMapping("sub7")
+    public void method7(String id, String pw) {
+        System.out.println("id = " + id);
+        System.out.println("pw = " + pw);
     }
 }
