@@ -20,18 +20,30 @@ localhost:8080/main11/sub2?dan=2
 구구단 3단 출력
 
 --%>
-<c:if test="${(param.dan >= 2) && (param.dan <= 9)}" var="ite">
-
-    <h4>구구단 ${param.dan}단</h4>
-    <c:forEach begin="1" end="9" var="i">
-        <p>${param.dan} * ${i} = ${param.dan * i}</p>
+<%--
+<c:if test="${param.dan >= 2 && param.dan <= 9}" var="i">
+    <h1>구구단 ${i}단</h1>
+    <c:forEach begin="1" end="9" var="item">
+        <p>${param.dan} * ${item} = ${param.dan * item}</p>
     </c:forEach>
-
 </c:if>
-<c:if test="${! ite}">
-
+<c:if test="${! i}">
     <p>다시 입력해주시기 바랍니다.</p>
 </c:if>
+--%>
+<c:choose>
+    <c:when test="${param.dan >= 2 && param.dan <= 9}">
+        <h1>구구단 ${param.dan}단</h1>
+        <c:forEach begin="1" end="9" var="item">
+            <p>${param.dan} * ${item} = ${param.dan * item}</p>
+        </c:forEach>
+    </c:when>
+    <c:otherwise>
+        <p>다시 입력해주시기 바랍니다.</p>
+    </c:otherwise>
+</c:choose>
+
+
 
 </body>
 </html>
