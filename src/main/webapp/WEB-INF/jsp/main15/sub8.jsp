@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 이정훈
-  Date: 2023-09-30
-  Time: PM 7:46
+  Date: 2023-10-03
+  Time: PM 6:07
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,12 +12,10 @@
     <title>Title</title>
 </head>
 <body>
-<h1>선택하신 음식 목록</h1>
-<ul>
-    <c:forEach items="${foodList}" var="item">
-        <li>${item}</li>
-    </c:forEach>
-</ul>
-<a href="/main15/sub9">다른 페이지에서 음식목록 확인</a>
+<h1>음식 리스트</h1>
+<c:forEach items="${foodList}" var="item">
+    <p>${item}</p>
+</c:forEach>
+<a href="/main15/sub9">다른 페이지에서 보기</a>
 </body>
 </html>

@@ -41,13 +41,14 @@ public class Controller15 {
         }
     }
 
+
     @GetMapping("sub4")
     public void method4() {
 
     }
 
     @PostMapping("sub5")
-    public void method(String name, HttpSession session) {
+    public void method5(String name, HttpSession session) {
         session.setAttribute("username", name);
     }
 
@@ -62,7 +63,7 @@ public class Controller15 {
     }
 
     @PostMapping("sub8")
-    public void method8(@RequestParam("foods") List<String> foods,
+    public void mehotd8(@RequestParam("foods") List<String> foods,
                         HttpSession session) {
         session.setAttribute("foodList", foods);
     }
@@ -79,13 +80,44 @@ public class Controller15 {
 
         model.addAttribute("attr1", "돈까스");
         session.setAttribute("attr1", "커피");
+
     }
 
-    @RequestMapping("sub11")
+    @GetMapping("sub11")
     public void method11(Model model, HttpSession session) {
         model.addAttribute("items", List.of("두식", "봉석"));
         session.setAttribute("items", List.of("피자", "햄버거", "돈까스"));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

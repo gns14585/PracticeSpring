@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 이정훈
-  Date: 2023-09-30
-  Time: PM 3:03
+  Date: 2023-10-03
+  Time: PM 5:59
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,30 +11,29 @@
     <title>Title</title>
 </head>
 <body>
-<h1>좋아하는 음식들 고르기</h1>
-<form action="/main15/sub8" method="post">
-    <%-- div*5>label[for=input$]+input:c#input$[name=foods][value] --%>
+  <h1>좋아하는 음식들 고르기</h1>
+  <form action="/main15/sub8" method="post">
     <div>
-        <label for="input1">pizza</label>
-        <input type="checkbox" name="foods" id="input1" value="pizza">
+      <label for="input1">pizza</label>
+      <input type="checkbox" name="foods" id="input1" value="pizza">
     </div>
     <div>
-        <label for="input2">donut</label>
-        <input type="checkbox" name="foods" id="input2" value="donut">
+      <label for="input2">donut</label>
+      <input type="checkbox" name="foods" id="input2" value="donut">
     </div>
     <div>
-        <label for="input3">tanghuru</label>
-        <input type="checkbox" name="foods" id="input3" value="tanghuru">
+      <label for="input3">tanghuru</label>
+      <input type="checkbox" name="foods" id="input3" value="tanghuru">
     </div>
     <div>
-        <label for="input4">kimbab</label>
-        <input type="checkbox" name="foods" id="input4" value="kimbab">
+      <label for="input4">kimbab</label>
+      <input type="checkbox" name="foods" id="input4" value="kimbab">
     </div>
     <div>
-        <label for="input5">bibimbab</label>
-        <input type="checkbox" name="foods" id="input5" value="bibimbab">
+      <label for="input5">bibimbab</label>
+      <input type="checkbox" name="foods" id="input5" value="bibimbab">
     </div>
     <button>전송</button>
-</form>
+  </form>
 </body>
 </html>

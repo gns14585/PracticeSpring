@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 이정훈
-  Date: 2023-09-30
-  Time: PM 8:02
+  Date: 2023-10-03
+  Time: PM 6:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,18 +12,14 @@
     <title>Title</title>
 </head>
 <body>
-<h1>model 목록</h1>
-<ul>
-  <c:forEach items="${items}" var="i">
+<h1>Model </h1>
+<c:forEach items="${items}" var="i">
     <p>${i}</p>
-  </c:forEach>
-</ul>
+</c:forEach>
 
-<h1>session 목록</h1>
-<ul>
-  <c:forEach items="${sessionScope.items}" var="j">
-    <li>${j}</li>
-  </c:forEach>
-</ul>
+<h1>session</h1>
+<c:forEach items="${sessionScope.items}" var="j">
+    <p>${j}</p>
+</c:forEach>
 </body>
 </html>
