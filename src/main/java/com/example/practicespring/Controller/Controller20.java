@@ -230,18 +230,18 @@ public class Controller20 {
 
     @GetMapping("sub11")
     public String method11(@RequestParam("country") List<String> countryList, Model model) throws Exception {
-        String rtt = "";
+        String rttr = "";
         for (int i = 0; i < countryList.size(); i++) {
-            rtt += "?";
-            if (i < countryList.size() -1) {
-                rtt += ", ";
+            rttr += "?";
+            if (i < countryList.size()-1) {
+                rttr += ", ";
             }
         }
 
         String sql = """
-                SELECT DISTINCT country FROM suppliers WHERE Country IN ("""
+                SELECT DISTINCT Country FROM suppliers WHERE Country IN ("""
                 +
-                rtt
+                rttr
                 +
                 """
                 )
@@ -263,5 +263,4 @@ public class Controller20 {
         model.addAttribute("countryList", list);
         return "/main20/sub11";
     }
-
 }
