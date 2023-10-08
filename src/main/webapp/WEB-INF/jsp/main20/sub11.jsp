@@ -13,8 +13,8 @@
 </head>
 <body>
 <h1>국가</h1>
-<c:forEach items="${custList}" var="i">
-    <p>${i.country} : ${i.name}</p>
+<c:forEach items="${countryList}" var="i">
+    <p>${i}</p>
 </c:forEach>
 
 </body>

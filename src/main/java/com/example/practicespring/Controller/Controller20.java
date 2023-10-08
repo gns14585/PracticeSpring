@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("main20")
@@ -231,19 +229,19 @@ public class Controller20 {
     }
 
     @GetMapping("sub11")
-    public String method11(@RequestParam("country") List<String> countryList, Model model) throws SQLException {
-        String rttr = "";
+    public String method11(@RequestParam("country") List<String> countryList, Model model) throws Exception {
+        String rtt = "";
         for (int i = 0; i < countryList.size(); i++) {
-            rttr += "?";
-            if (i < countryList.size()-1) {
-                rttr += ", ";
+            rtt += "?";
+            if (i < countryList.size() -1) {
+                rtt += ", ";
             }
         }
 
         String sql = """
-                SELECT * FROM suppliers WHERE Country IN ("""
+                SELECT DISTINCT country FROM suppliers WHERE Country IN ("""
                 +
-                rttr
+                rtt
                 +
                 """
                 )
@@ -252,25 +250,17 @@ public class Controller20 {
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         for (int i = 0; i < countryList.size(); i++) {
-            // ?의 위치는 1번부터 시작 (i+1)
-            // 리스트의 첫번쨰 아이템의 위치는 0번째부터 시작 (i)
             statement.setString(i+1, countryList.get(i));
         }
         ResultSet resultSet = statement.executeQuery();
 
-        List<Map<String, Object>> list = new ArrayList<>();
-
-        try(connection; statement; resultSet;) {
+        List<String> list = new ArrayList<>();
+        try(connection; statement; resultSet) {
             while (resultSet.next()) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("country", resultSet.getString(7));
-                map.put("name", resultSet.getString(2));
-
-                list.add(map);
+                list.add(resultSet.getString(1));
             }
         }
-
-        model.addAttribute("custList", list);
+        model.addAttribute("countryList", list);
         return "/main20/sub11";
     }
 
