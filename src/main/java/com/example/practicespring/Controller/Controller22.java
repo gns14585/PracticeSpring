@@ -178,7 +178,7 @@ public class Controller22 {
             while (resultSet.next()) {
                 if (resultSet1.next()) {
                     int countAll = resultSet1.getInt(1);
-                    lastPageNumber = (countAll - 1) / 5;
+                    lastPageNumber = (countAll - 1) / 7;
 
                     model.addAttribute("lastPageNumber", lastPageNumber);
                 }
