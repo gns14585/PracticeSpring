@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,71 +20,33 @@ import java.util.Map;
 @Controller
 @RequestMapping("main23")
 public class Controller23 {
-
     @Autowired
     private DataSource dataSource;
 
-    @RequestMapping("sub1")
-    public void method1(@RequestParam(defaultValue = "1") Integer page, Model model) throws Exception {
+    @GetMapping("sub1")
+    public void method1(String keyword) throws SQLException {
         String sql = """
-                SELECT CustomerID id, CustomerName name, Address address, City city, Country country 
-                FROM customers ORDER BY CustomerID LIMIT ?, ?     
+                SELECT * FROM products WHERE productName LIKE ?
                 """;
-
-        String sql1 = """
-                SELECT COUNT(*) FROM customers
-                """;
-
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, (page - 1) * 5);
-        statement.setInt(2, 5);
+        statement.setString(1, "%" + keyword + "%");
         ResultSet resultSet = statement.executeQuery();
 
-        Connection connection1 = dataSource.getConnection();
-        Statement statement1 = connection1.createStatement();
-        ResultSet resultSet1 = statement1.executeQuery(sql1);
-
-        List<Map<String, Object>> list = new ArrayList<>();
-        int lastPageNumber = 1;
-
-        try (connection1; connection; statement1; statement; resultSet1; resultSet) {
+        try (connection; statement; resultSet) {
+            System.out.println();
+            System.out.println(keyword + "가 포함된 상품명들");
             while (resultSet.next()) {
-                if (resultSet1.next()) {
-                    int countAll = resultSet1.getInt(1);
-                    lastPageNumber = (countAll - 1) / 5;
-
-                    model.addAttribute("lastPageNumber", lastPageNumber);
-                }
-                Map<String, Object> map = new HashMap<>();
-                map.put("id", resultSet.getString("id"));
-                map.put("name", resultSet.getString("name"));
-                map.put("address", resultSet.getString("address"));
-                map.put("city", resultSet.getString("city"));
-                map.put("country", resultSet.getString("country"));
-
-                list.add(map);
+                String name = resultSet.getString("productName");
+                System.out.println("name = " + name);
             }
         }
-
-        int leftPageNumber = (page - 1) / 5 * 5 + 1;
-        int rightPageNumber = leftPageNumber + 4;
-        int prevPageNumber = leftPageNumber - 5;
-        int nextPageNumber = rightPageNumber + 1;
-        int firstPageNumber = 1;
-
-        rightPageNumber = Math.min(rightPageNumber, lastPageNumber);
-
-        model.addAttribute("leftPageNumber", leftPageNumber);
-        model.addAttribute("rightPageNumber", rightPageNumber);
-        model.addAttribute("prevPageNumber", prevPageNumber);
-        model.addAttribute("nextPageNumber", nextPageNumber);
-        model.addAttribute("firstPageNumber", firstPageNumber);
-        model.addAttribute("custList", list);
     }
 
+    // /main23/sub2?k=erd
+    // erd 라는 텍스트가 중간에 있는 고객명 조회
     @GetMapping("sub2")
-    public void method2(@RequestParam(value = "k", defaultValue = "") String keyword, Model model) throws Exception {
+    public void method2(@RequestParam(value = "k", defaultValue = "") String keyword, Model model) throws SQLException {
         String sql = """
                 SELECT * FROM customers WHERE CustomerName LIKE ?
                 """;
@@ -94,68 +56,65 @@ public class Controller23 {
         ResultSet resultSet = statement.executeQuery();
 
         List<String> list = new ArrayList<>();
-
-        try (connection; statement; resultSet) {
+        try(connection; statement; resultSet) {
             System.out.println();
-            System.out.println(keyword + "가 포함된 고객명들");
+            System.out.println(keyword + "가 포함된 고객 목록");
             while (resultSet.next()) {
                 String name = resultSet.getString("customerName");
+//                System.out.println("name = " + name);
                 list.add(name);
             }
-        }
         model.addAttribute("keyword", keyword);
         model.addAttribute("nameList", list);
+        }
     }
 
+    // /main23/sub3?st=name1
     @GetMapping("sub3")
     public void method3(@RequestParam(value = "st", defaultValue = "name1") String searchType,
-                        @RequestParam(value = "k", defaultValue = "") String keyword, Model model) throws Exception {
+                        @RequestParam(value = "k", defaultValue = "") String keyword,
+                        Model model) throws SQLException {
         String sql = """
                 SELECT * FROM customers WHERE
                 """;
-
         if (searchType.equals("name1")) {
             sql += "customerName LIKE ?";
-        } else if (searchType.equals("name2")) {
+        } else if(searchType.equals("name2")) {
             sql += "contactName LIKE ?";
         }
-
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, "%" + keyword + "%");
         ResultSet resultSet = statement.executeQuery();
 
         List<Map<String, Object>> list = new ArrayList<>();
-        try (connection; statement; resultSet) {
+        try(connection; statement; resultSet) {
             while (resultSet.next()) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("customerName", resultSet.getString("customerName"));
-                map.put("contactName", resultSet.getString("contactName"));
+                String customerName = resultSet.getString("customerName");
+                String contactName = resultSet.getString("contactName");
 
-                list.add(map);
+                list.add(Map.of("customerName", customerName, "contactName", contactName));
+
             }
         }
-        model.addAttribute("nameList", list);
         model.addAttribute("searchType", searchType);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("customer", list);
     }
 
+
     @GetMapping("sub4")
-    public void method4(@RequestParam(value = "st", defaultValue = "lname") String searchType,
-                        @RequestParam(value = "k", defaultValue = "") String keyword, Model model) throws Exception {
+    public void method4(@RequestParam(value = "t", defaultValue = "lname") String searchType,
+                        @RequestParam(value = "k", defaultValue = "") String keyword, Model model) throws SQLException {
         String sql = """
                 SELECT * FROM employees WHERE
                 """;
-
-        switch (searchType) {
-            case "lname":
-                sql += "lastName LIKE ?";
-                break;
-            case "fname":
-                sql += "firstName LIKE ?";
-                break;
-            case "notes":
-                sql += "notes LIKE ?";
+        if (searchType.equals("lname")) {
+            sql += "lastName LIKE ?";
+        } else if (searchType.equals("fname")) {
+            sql += "firstName LIKE ?";
+        } else if (searchType.equals("notes")) {
+            sql += "notes LIKE?";
         }
 
         Connection connection = dataSource.getConnection();
@@ -164,19 +123,39 @@ public class Controller23 {
         ResultSet resultSet = statement.executeQuery();
 
         List<Map<String, Object>> list = new ArrayList<>();
-
         try(connection; statement; resultSet) {
             while (resultSet.next()) {
                 Map<String, Object> map = new HashMap<>();
-                map.put("lastName", resultSet.getString("lastName"));
-                map.put("firstName", resultSet.getString("firstName"));
+                map.put("lname", resultSet.getString("lastName"));
+                map.put("fname", resultSet.getString("firstName"));
                 map.put("notes", resultSet.getString("notes"));
 
                 list.add(map);
             }
         }
-        model.addAttribute("searchType", searchType);
         model.addAttribute("keyword", keyword);
-        model.addAttribute("cusList", list);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("nameList", list);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
