@@ -24,11 +24,12 @@ public interface MyDao4 {
 
 
     @Select("""
-            SELECT EmployeeID id, LastName, FirstName, BirthDate, Photo, Notes, salay
+            SELECT EmployeeID id, LastName, FirstName, BirthDate, Photo, Notes
             FROM employees
             WHERE EmployeeID = #{id}
             """)
     MyDto33Employee select8(Integer id);
+
 
     @Update("""
             UPDATE employees
@@ -42,15 +43,16 @@ public interface MyDao4 {
     int update1(MyDto33Employee employee);
 
     @Select("""
-            SELECT CustomerID id, CustomerName, ContactName, Address, City, PostalCode, Country
+            SELECT CustomerID id, CustomerName name, ContactName, Address, City, PostalCode, Country
             FROM customers
             WHERE CustomerID = #{id}
             """)
     MyDto34Customer select9(Integer id);
 
+
     @Update("""
             UPDATE customers
-            SET CustomerName = #{customerName},
+            SET CustomerName = #{name},
                 ContactName = #{contactName},
                 Address = #{address},
                 City = #{city},
