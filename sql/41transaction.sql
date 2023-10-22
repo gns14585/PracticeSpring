@@ -11,10 +11,10 @@ VALUES ('son', 10000),
 
 -- 송금 업무 son -> kim 1000원 송금
 UPDATE bank
-SET money = money - 1000
+SET money = 10000
 WHERE name = 'son';
 UPDATE bank
-SET money = money + 1000
+SET money = 10000
 WHERE name = 'kim';
 
 SELECT * FROM BANK;

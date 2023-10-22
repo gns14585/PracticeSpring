@@ -17,10 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class Controller30 {
 
     private final MyDao4 dao;
-
     // /main30/sub11?id=
     @GetMapping("sub11")
     public void method11(Integer id) {
+        // 반환타입이 int 인 경우는 쿼리문이 Insert, Update, Delete
         int rows = dao.delete1(id);
         System.out.println(rows + "개 행이 지워짐");
     }
