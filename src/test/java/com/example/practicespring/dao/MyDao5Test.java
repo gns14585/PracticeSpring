@@ -19,12 +19,10 @@ class MyDao5Test {
     void select5test1() {
         dao.select5();
     }
-
     @Test
     void select6test1() {
         dao.select6();
     }
-
     @Test
     void select7test1() {
         dao.select7(List.of("mexico", "uk"));
@@ -55,25 +53,6 @@ class MyDao5Test {
         dao.select9("com");
     }
 
-    @Test
-    void select10test1() {
-        dao.select10("abc");
-    }
-
-    @Test
-    void select10test2() {
-        dao.select10("def");
-    }
-
-    @Test
-    void select10test3() {
-        dao.select10("q");
-    }
-
-    @Test
-    void select10test4() {
-        dao.select10("k");
-    }
 }
 
 

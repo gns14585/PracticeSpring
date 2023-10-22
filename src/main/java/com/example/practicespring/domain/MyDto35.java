@@ -7,8 +7,9 @@ public class MyDto35 {
     @Getter
     private String uRL;
 
+
+    // 프로퍼티명 : id
     public String getId() {
         return id;
     }
-
 }

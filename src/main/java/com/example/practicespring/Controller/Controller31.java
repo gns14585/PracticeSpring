@@ -31,24 +31,22 @@ public class Controller31 {
         dao.select2(num);
     }
 
-    // /main31/sub3?code=1&k=ro
-    // /main31/sub3?code=2&k=ro
+    // main31/sub3?code=1&k=ro
+    // main31/sub3?code=2&k=ro
     @GetMapping("sub3")
     public void method3(Integer code, String k, Model model) {
         // code가 1이면
         /*
         SELECT customerName, contactName
         FROM customers
-        WHERE
-            customerName LIKE '%ro%'
+        WHERE customerName LIKE '%ro%'
          */
 
         // code가 2이면
         /*
         SELECT customerName, contactName
         FROM customers
-        WHERE
-            contactName LIKE '%ro%'
+        WHERE contactName LIKE '%ro%'
          */
         List<Map<String, Object>> rows = dao.select3(code, "%" + k + "%");
         model.addAttribute("names", rows);

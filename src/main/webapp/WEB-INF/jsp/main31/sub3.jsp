@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 사용자
-  Date: 2023-10-19
-  Time: PM 7:58
+  Date: 2023-10-22
+  Time: PM 12:41
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -21,7 +21,16 @@
     <input type="text" name="k" placeholder="검색어">
     <button>조회</button>
 </form>
+
 <hr>
+
+<style>
+    table, th, td {
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+</style>
+
 <table>
     <tr>
         <th>고객명</th>
