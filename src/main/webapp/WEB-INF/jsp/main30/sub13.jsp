@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
-  User: 사용자
-  Date: 2023-10-19
-  Time: PM 5:37
+  User: 이정훈
+  Date: 2023-10-22
+  Time: AM 11:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
     <title>Title</title>
@@ -17,8 +16,12 @@
     <input type="text" name="id" placeholder="직원번호">
     <button>조회</button>
 </form>
-<h3>${message}</h3>
 <hr>
+<div>
+    <h3>
+        ${message}
+    </h3>
+</div>
 
 <h3>직원 수정</h3>
 <form action="/main30/sub14" method="post">
@@ -41,8 +44,9 @@
         <textarea name="notes" id="" cols="30" rows="10">${employee.notes}</textarea>
     </div>
     <div>
-        <button>수정</button>
+        <button>전송</button>
     </div>
+
 </form>
 </body>
 </html>

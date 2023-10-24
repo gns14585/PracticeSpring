@@ -35,6 +35,7 @@ public class Controller31 {
     // main31/sub3?code=2&k=ro
     @GetMapping("sub3")
     public void method3(Integer code, String k, Model model) {
+        // 문제
         // code가 1이면
         /*
         SELECT customerName, contactName
