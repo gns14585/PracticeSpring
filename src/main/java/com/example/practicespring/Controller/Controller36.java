@@ -1,6 +1,8 @@
 package com.example.practicespring.Controller;
 
 import com.example.practicespring.dao.MyDao7;
+import com.example.practicespring.domain.MyDto40;
+import com.example.practicespring.domain.MyDto41;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -130,6 +132,115 @@ public class Controller36 {
     @DeleteMapping("sub10/{id}")
     public void method10(@PathVariable String id) {
         System.out.println("id = " + id);
+    }
+
+    /*
+    axios.delete("/main36/sub11/1")
+    axios.delete("/main36/sub11/3")
+    axios.delete("/main36/sub11/5")
+     */
+    @DeleteMapping("sub11/{pid}")
+    public void method11(@PathVariable Integer pid) {
+        int c = dao.deleteByProductId(pid);
+        System.out.println(c + "개 데이터 삭제됨");
+    }
+
+    /*
+    axios.delete("/main36/sub12/1")
+    axios.delete("/main36/sub12/3")
+    axios.delete("/main36/sub12/5")
+     */
+    @DeleteMapping("sub12/{id}")
+    public void method12(@PathVariable Integer id) {
+        int r = dao.deleteByCustomerId(id);
+        System.out.println(r + "개 데이터 삭제됨");
+    }
+
+    /*
+    axios.put("/main36/sub13")
+    put /main36/sub13
+     */
+
+//    @RequestMapping(method = RequestMethod.PUT, value = "sub13")
+    @PutMapping("sub13")
+    public void method13() {
+        System.out.println("Controller36.method13");
+    }
+
+    /*
+    axios.put("/main36/sub14", {
+        name: "son",
+        address: "korea"
+    }, {
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        }
+    })
+     */
+    // put /main36/sub14
+    // name=son&address=korea
+    @PutMapping("sub14")
+    public void method14(String name, String address) {
+        System.out.println("name = " + name);
+        System.out.println("address = " + address);
+    }
+
+    /*
+    axios.put("/main36/sub15", {
+        city: "seoul",
+        age: 62,
+        score: 3.14
+    }, {
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        }
+    })
+     */
+
+    @PutMapping("sub15")
+    public void method15(String city, Integer age, Double score) {
+        System.out.println("city = " + city);
+        System.out.println("age = " + age);
+        System.out.println("score = " + score);
+    }
+
+    /*
+    axios.put("/main36/sub16", {
+        id: 15,
+        name: "햄버거",
+        cateogry: 2,
+        price: 5000.00
+    }, {
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        }
+   })
+     */
+    @PutMapping("sub16")
+    public void method16(MyDto40 dto) {
+        int rows = dao.updateProduct(dto);
+        System.out.println(rows + "개 데이터 수정됨");
+    }
+
+    /*
+    axios.put("/main36/sub17", {
+        lastName: "lee",
+        firstName: "kangin",
+        birthDate: "2020-01-01",
+        id: 5
+    }, {
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        }
+   });
+     */
+    @PutMapping("sub17")
+    public void method17(MyDto41 dto) {
+        int c = dao.updateEmployee(dto);
+        System.out.println(dto.getFirstName());
+        System.out.println(dto.getLastName());
+        System.out.println(dto.getBirthDate());
+        System.out.println(dto.getId());
     }
 
 
