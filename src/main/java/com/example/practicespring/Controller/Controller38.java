@@ -18,6 +18,10 @@ import java.util.Map;
 public class Controller38 {
 
     private final MyDao8 dao;
+    @GetMapping("sub0")
+    public void method0() {
+
+    }
 
     /*
     axios.get("/main38/sub1")
@@ -36,7 +40,11 @@ public class Controller38 {
     @GetMapping("sub2")
     @ResponseBody
     public String method2() {
-
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return "hello world";
     }
 
@@ -60,6 +68,7 @@ public class Controller38 {
     public Map<String, Object> method4() {
 
         return Map.of("city", "seoul",
+                "price", 3000,
                 "list", List.of("son", "lee", "kim"),
                 "birth", "1999-03-03");
     }
