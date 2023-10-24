@@ -7,10 +7,7 @@ import com.example.practicespring.domain.MyDto42;
 import com.example.practicespring.domain.MyDto43;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -148,6 +145,10 @@ public class Controller37 {
         int i = dao.updateEmployee(dto);
         System.out.println(dto.getId() + "번 직원 수정됨");
     }
+
+
+
+
     
 
 
