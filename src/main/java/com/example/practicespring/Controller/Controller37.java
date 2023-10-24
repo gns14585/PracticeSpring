@@ -1,6 +1,8 @@
 package com.example.practicespring.Controller;
 
+import com.example.practicespring.dao.MyDao7;
 import com.example.practicespring.domain.MyDto3;
+import com.example.practicespring.domain.MyDto41;
 import com.example.practicespring.domain.MyDto42;
 import com.example.practicespring.domain.MyDto43;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("main37")
 public class Controller37 {
+
+    private final MyDao7 dao;
 
     /*
     axios.post("/main37/sub1", '{"name" : "jones"', {
@@ -128,6 +132,21 @@ public class Controller37 {
         System.out.println("dto.getPrice() = " + dto.getPrice());
         System.out.println("dto.getWeight() = " + dto.getWeight());
         System.out.println("dto.getMarried() = " + dto.getMarried());
+    }
+
+    /*
+    axios.put("/main37/sub7", {
+        id: 3,
+        lastName: "kim",
+        firstName: "minjae",
+        birthDate: "1999-09-09"
+    })
+     */
+
+    @PutMapping("sub7")
+    public void method7(@RequestBody MyDto41 dto) {
+        int i = dao.updateEmployee(dto);
+        System.out.println(dto.getId() + "번 직원 수정됨");
     }
     
 
